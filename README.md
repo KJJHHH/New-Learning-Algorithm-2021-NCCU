@@ -20,27 +20,27 @@ Predicting copper price.
 
 ## Mechanism
 
-### LTS (L11)
+### LTS (Lecture 11)
 - Select the {ns} samples that fit the learning goal 
 - Select {ks} of k element that is not in {ns}
 - Take {ns} + {ks} as training data
 - Keep doing full learning algorithm to get all training data
 
-### Weight Tuning Module (L6)
+### Weight Tuning Module (Lecture 6)
 - Simple learning
 - If acceptable: go to Reorganise module
 - If not acceptable: go to Cramming
 
-### Reorganising Module (L7)
+### Reorganising Module (Lecture 7)
 - Complex learning
 - Removing irrelavent nodes
 - Coping with Overfitting problem
 
-### Cramming Module (L9)
+### Cramming Module (Lecture 9)
 - Ruled based adding nodes
 - For each case that did not fit well to the model, assign three nodes for the case in the model, where the weights for each nodes is predefined
 
-### Full learning algorithm (L11)
+### Full learning algorithm (Lecture 11)
 ```
 Notation
 # n: picked data to train in traing data
