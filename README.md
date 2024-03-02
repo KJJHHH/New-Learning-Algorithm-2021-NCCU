@@ -90,8 +90,8 @@ Notation
 ### Others
 1. Benchmark model with no initialisation and 10000 epochs
     - Two layer net on copper
-        ![Alt text](image-4.png)
+        ![Image](https://github.com/KJJHHH/New-Learning-Algorithm-2021-NCCU/blob/main/baseline_result/Two-Layer-Net%20Loss.png)
     - Three layer net on copper
-        ![Alt text](image-5.png)
+        ![Image](https://github.com/KJJHHH/New-Learning-Algorithm-2021-NCCU/blob/main/baseline_result/Three-Layer-Net%20Loss.png)
 
 
