@@ -4,7 +4,6 @@ New Learning Algorithm (2021), by Prof. TSAIH RUA-HUAN at Management Information
 
 - [INTRODUCTION](https://github.com/KJJHHH/New-Learning-Algorithm-2021-NCCU?tab=readme-ov-file#introduction)
 - [DATA](https://github.com/KJJHHH/New-Learning-Algorithm-2021-NCCU?tab=readme-ov-file#data)
-- [MODULES](https://github.com/KJJHHH/New-Learning-Algorithm-2021-NCCU?tab=readme-ov-file#modules)
 - [NEW LEARNING ALGORITHM](https://github.com/KJJHHH/New-Learning-Algorithm-2021-NCCU?tab=readme-ov-file#new-learning-algorithm)
 - [RESULT](https://github.com/KJJHHH/New-Learning-Algorithm-2021-NCCU?tab=readme-ov-file#result)
 - [ENVIRONMENT](https://github.com/KJJHHH/New-Learning-Algorithm-2021-NCCU?tab=readme-ov-file#environment)
@@ -21,8 +20,7 @@ Including 18 variables and copper price
 `````python  
 """
 NOTE:
-# n: picked data to train in traing data
-# N: all training data
+1. Definition of acceptable: The maximum residual error for training samples does not exceed a predefined threshold.
 """
 1. Start and Initialise model with hidden node size 1 and do Weight tuning
 2. Do LTS with k = 1 and get selected training data, denoted as S. 
@@ -37,10 +35,7 @@ NOTE:
 `````
 
 ### MODULES
-The modules used in new learning algorithm
-- NOTE
-    - :notebook: **Definition of acceptable**\
-        The maximum residual error for training samples does not exceed a predefined threshold.
+The modules used in new learning algorith
 - LTS (Lecture 11)
     - Select all samples that fit the learning goal, denoted as {ns}
     - Select k samples, denoted as {ks}, that is not in {ns}
