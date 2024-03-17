@@ -3,13 +3,11 @@
 New Learning Algorithm (2021), by Prof. TSAIH RUA-HUAN at Management Information Systems in NCCU
 
 ## Introduction
-The **new learning algorithm** is a revised learning mechanism based on simple two layer net, aiming to overcome the overfitting and learning dilemma issues.
-
-## Learning Goals
-Predicting copper price.
+The **new learning algorithm** is a revised learning mechanism based on simple two layer net, aiming to overcome the overfitting and learning dilemma issues.\
+The goal of this project is to **predict copper price** using new leanring algorithm
 
 ## Data
-Cleaned data provided by teacher with 18 variables and copper price
+Including 18 variables and copper price
 
 ## Environment
 - GPU: CUDA 12.0
