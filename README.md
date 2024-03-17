@@ -9,7 +9,7 @@ The **new learning algorithm** is a revised learning mechanism based on simple t
 Predicting copper price.
 
 ## Data
-- Cleaned data provided by teacher with 18 variables and copper price
+Cleaned data provided by teacher with 18 variables and copper price
 
 ## Environment
 - GPU: CUDA 12.0
@@ -18,10 +18,8 @@ Predicting copper price.
 
 
 ## MODULES
-```python
-NOTE:
+:notebook: NOTE:\
 definition of acceptable: the maximum residual error for training samples does not exceed a predefined threshold.
-```
 ### LTS (Lecture 11)
 - Select all samples that fit the learning goal, denoted as {ns}
 - Select k samples, denoted as {ks}, that is not in {ns}
