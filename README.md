@@ -16,28 +16,8 @@ The goal of this project is to **predict copper price** using new leanring algor
 ## DATA
 Including 18 variables and copper price
 
-## MODULES
-The modules used in new learning algorithm
-### NOTE
-- :notebook: **Definition of acceptable**\
-    The maximum residual error for training samples does not exceed a predefined threshold.
-### LTS (Lecture 11)
-- Select all samples that fit the learning goal, denoted as {ns}
-- Select k samples, denoted as {ks}, that is not in {ns}
-- Take {ns} + {ks} as training data
-### Weight Tuning Module (Lecture 6)
-- If acceptable: go to Reorganise module
-- If not acceptable: go to Cramming
-
-### Reorganising Module (Lecture 7)
-- Removing irrelavent nodes
-- Coping with Overfitting problem
-
-### Cramming Module (Lecture 9)
-- Ruled based adding nodes
-- For each case that did not fit well to the model, assign three nodes for the case in the model, where the weights for each nodes is predefined
-
 ## NEW LEARNING ALGORITHM
+### Algorithm
 `````python  
 """
 NOTE:
@@ -55,6 +35,26 @@ NOTE:
 5. Reorganise SLFN
 6. GO to step 2
 `````
+
+### MODULES
+The modules used in new learning algorithm
+- NOTE
+    - :notebook: **Definition of acceptable**\
+        The maximum residual error for training samples does not exceed a predefined threshold.
+- LTS (Lecture 11)
+    - Select all samples that fit the learning goal, denoted as {ns}
+    - Select k samples, denoted as {ks}, that is not in {ns}
+    - Take {ns} + {ks} as training data
+- Weight Tuning Module (Lecture 6)
+    - If acceptable: go to Reorganise module
+    - If not acceptable: go to Cramming
+- Reorganising Module (Lecture 7)
+    - Removing irrelavent nodes
+    - Coping with Overfitting problem
+- Cramming Module (Lecture 9)
+    - Ruled based adding nodes
+    - For each case that did not fit well to the model, assign three nodes for the case in the model, where the weights for each nodes is predefined
+
 
 ## RESULT
 
