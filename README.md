@@ -20,7 +20,8 @@ Cleaned data provided by teacher with 18 variables and copper price
 ## MODULES
 The modules used in new learning algorithm
 ### NOTE
-:notebook: **Definition of acceptable**: The maximum residual error for training samples does not exceed a predefined threshold.
+- :notebook: **Definition of acceptable**\
+    The maximum residual error for training samples does not exceed a predefined threshold.
 ### LTS (Lecture 11)
 - Select all samples that fit the learning goal, denoted as {ns}
 - Select k samples, denoted as {ks}, that is not in {ns}
