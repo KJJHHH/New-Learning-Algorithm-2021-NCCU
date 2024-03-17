@@ -2,18 +2,12 @@
 
 New Learning Algorithm (2021), by Prof. TSAIH RUA-HUAN at Management Information Systems in NCCU
 
-## Introduction
+## INTRODUCTION
 The **new learning algorithm** is a revised learning mechanism based on simple two layer net, aiming to overcome the overfitting and learning dilemma issues.\
 The goal of this project is to **predict copper price** using new leanring algorithm
 
-## Data
+## DATA
 Including 18 variables and copper price
-
-## Environment
-- GPU: CUDA 12.0
-- Python 3.11
-- Pytorch
-
 
 ## MODULES
 The modules used in new learning algorithm
@@ -55,39 +49,14 @@ NOTE:
 6. GO to step 2
 `````
 
+## RESULT
 
-## Result
+|                         | Train Loss | Test Loss  | Train Time  | 
+| ----------------------- | ----------------------- | ----------- |
+| Full learning algorithm |   1.366    | 19.586     |   250 min   |
+| Two Layer Net           |   1.075    | 19.261     |   4 min     |
 
-1. Full learning algorithm 
-    Train loss / Test loss
-    - epoch 50               # for each module
-    - learning goal: e ** 2  # for all residual square < learning goals in train data
-    - learning rate: 0.01    # for each module
-
-    |        Dataset       | Full learning algorithm | Train time            |
-    | -------------------- | ----------------------- | --------------------- |
-    |       Copper         |        1.366/19.586     |   250 min (not sure)  |
-
-2. Benchmark: simple fully connected net (2 ~ 3)\
-    Trainloss / Testloss/ Epochs / Traintime(Min)
-
-    |  Dataset   | Two layer net           |  
-    | ---------- | ----------------------- |  
-    |   Copper   | 1.075/19.261/2000/4     | 
-
-    - learning rate: 0.001, 0.01 will explode
-    - hidden nodes: 50
-
-
-
-## Conclusion 
-1. The full learning algorithm might not out perform other models
-
-### Others
-1. Benchmark model with no initialisation and 10000 epochs
-    - Two layer net on copper
-        ![Image](https://github.com/KJJHHH/New-Learning-Algorithm-2021-NCCU/blob/main/baseline_result/Two-Layer-Net%20Loss.png)
-    - Three layer net on copper
-        ![Image](https://github.com/KJJHHH/New-Learning-Algorithm-2021-NCCU/blob/main/baseline_result/Three-Layer-Net%20Loss.png)
-
-
+## ENVIRONMENT
+- GPU: CUDA 12.0
+- Python 3.11
+- Pytorch
