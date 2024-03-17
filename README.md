@@ -18,8 +18,8 @@ Cleaned data provided by teacher with 18 variables and copper price
 
 
 ## MODULES
-### :notebook: NOTE
-definition of acceptable: the maximum residual error for training samples does not exceed a predefined threshold.
+### NOTE
+:notebook: definition of acceptable: the maximum residual error for training samples does not exceed a predefined threshold.
 ### LTS (Lecture 11)
 - Select all samples that fit the learning goal, denoted as {ns}
 - Select k samples, denoted as {ks}, that is not in {ns}
