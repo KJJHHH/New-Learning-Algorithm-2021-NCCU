@@ -3,7 +3,7 @@
 New Learning Algorithm (2021), by Prof. TSAIH RUA-HUAN at Management Information Systems in NCCU
 
 ## Introduction
-The learning algorithm is a revised learning mechanism based on simple two layer net. To overcome the overfitting and learning dilemma issues, two module, reorganizing module and cramming, are proposed to cope with each issues respectively.
+The **new learning algorithm** is a revised learning mechanism based on simple two layer net, aiming to overcome the overfitting and learning dilemma issues.
 
 ## Learning Goals
 Predicting copper price.
@@ -17,21 +17,20 @@ Predicting copper price.
 - Pytorch
 
 
-## Mechanism
-
+## MODULES
+```python
+NOTE:
+definition of acceptable: the maximum residual error for training samples does not exceed a predefined threshold.
+```
 ### LTS (Lecture 11)
-- Select the {ns} samples that fit the learning goal 
-- Select {ks} of k element that is not in {ns}
+- Select all samples that fit the learning goal, denoted as {ns}
+- Select k samples, denoted as {ks}, that is not in {ns}
 - Take {ns} + {ks} as training data
-- Keep doing full learning algorithm to get all training data
-
 ### Weight Tuning Module (Lecture 6)
-- Simple learning
 - If acceptable: go to Reorganise module
 - If not acceptable: go to Cramming
 
 ### Reorganising Module (Lecture 7)
-- Complex learning
 - Removing irrelavent nodes
 - Coping with Overfitting problem
 
@@ -39,24 +38,24 @@ Predicting copper price.
 - Ruled based adding nodes
 - For each case that did not fit well to the model, assign three nodes for the case in the model, where the weights for each nodes is predefined
 
-### Full learning algorithm (Lecture 11)
-```
-Notation
+## NEW LEARNING ALGORITHM
+`````python  
+"""
+NOTE:
 # n: picked data to train in traing data
 # N: all training data
-```
-1. Start and INitilasie with hidden node size 1: Initilialise Module
-2. Let n = obtaining_LTS, n += 1 
-    - The obtaining_LTS
-    - if n > N break 
-3. Selecting _LTS(n). I(n) = the picked data indexes
-4. If the learning goal for picked train data satisfied (max(eps) <= learning goal), Go step 7; Otherwise, there is oen and onlly one k in n that cause contradicton and k = [n]    
-5. Save weight
-6. Weight tune the current SLFN
-    - IF acceptable: go step 7
-    - Otherwise, restore weight cram to get acceptable SLFN
-7. Reorganise SLFN
-8. GO to step 2
+"""
+1. Start and Initialise model with hidden node size 1 and do Weight tuning
+2. Do LTS with k = 1 and get selected training data, denoted as S. 
+3. Save weight
+    3.1 If S residuals satisfied learning goal (max(eps) <= learning goal), Go step 5; 
+    3.2 Otherwise, there is one and only one sample in S that are not satisfy the learning goal    
+4. Weight tune the current model
+    4.1 IF acceptable: go step 5
+    4.2 Otherwise, restore weight and do cramming to get acceptable SLFN
+5. Reorganise SLFN
+6. GO to step 2
+`````
 
 
 ## Result
