@@ -10,7 +10,6 @@ Predicting copper price.
 
 ## Data
 - Cleaned data provided by teacher with 18 covariate with dependent variable as price
-- Inspect with [HOUSE PRICE data](https://github.com/KJJHHH/New-Learning-Algorithm/tree/main/DATA_HOUSE_PRICE)
 
 ## Environment
 - GPU: CUDA 12.0
