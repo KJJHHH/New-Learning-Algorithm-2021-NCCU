@@ -9,7 +9,7 @@ The learning algorithm is a revised learning mechanism based on simple two layer
 Predicting copper price.
 
 ## Data
-- Cleaned data provided by teacher with 18 covariate with dependent variable as price
+- Cleaned data provided by teacher with 18 variables and copper price
 
 ## Environment
 - GPU: CUDA 12.0
