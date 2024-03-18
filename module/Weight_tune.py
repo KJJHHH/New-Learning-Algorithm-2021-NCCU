@@ -1,19 +1,6 @@
-from torch.utils.data import Dataset, DataLoader
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import normalize
-import torch, copy
-import torch.nn as nn
 import torch.optim as optim
-import torch.utils.data as Data
-import torch.nn.functional as F
-import torchvision
-import  matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import gc
-from module.Model import TwoLayerNet
 from module.utils import *
-from tqdm.auto import tqdm
+from tqdm import tqdm
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -38,19 +25,18 @@ def module_weight_EU_LG_UA(model, train_loader, test_loader, out_file,
     temp_save_path = "_temp/wt.pth"
     acceptable_path = "acceptable/wt.pth"
     unacceptable_path = "unacceptable/wt.pth"
-    model.train()
+    model.to(device).train()
     optimizer = optim.Adam(model.parameters(), lr=lr_rate)
     loss_old = 5e+9
     train_loss_list = []
     test_loss_list = []
     
-    for epoch in range(epochs):
-        gc.collect()
-
+    for epoch in tqdm(range(epochs)):
+        
         train_loss = 0
-
         # forward operation
-        for X, y in tqdm(train_loader):
+        for X, y in train_loader:
+            X, y = X.to(device), y.to(device)
             
             optimizer.zero_grad()
             preds = model(X)

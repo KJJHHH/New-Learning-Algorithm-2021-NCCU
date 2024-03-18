@@ -52,11 +52,15 @@ The modules used in new learning algorith
 
 
 ## RESULT
+train loss: 0.00041519435840462924
+test loss: 0.002123679771900428
+train residual max 0.026442381296536088
+test residual max 0.04143138922202543
 
-|                         | Train Loss | Test Loss  | Train Time  | 
-| ----------------------- | ---------- | ---------- | ----------- |
-| Full learning algorithm |   1.366    | 19.586     |   250 min   |
-| Two Layer Net           |   1.075    | 19.261     |   4 min     |
+|                         | Train Loss | Train Max Epsilon | Test Loss  | Test Max Epsilon | Train Time  | 
+| ----------------------- | ---------- | ----------------- | ---------- | -----------------| ----------- |
+| Full learning algorithm |   0.00016  |      0.00118      | 0.000496   |       0.00500    |    22 min   |
+| Two Layer Net           |   0.00041  |      0.02644      | 0.00212    |       0.04143    |   4 min     |
 
 ## ENVIRONMENT
 - GPU: CUDA 12.0

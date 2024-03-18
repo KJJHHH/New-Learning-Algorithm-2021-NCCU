@@ -1,18 +1,9 @@
-from torch.utils.data import Dataset, DataLoader
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import normalize
-import torch, copy
+import torch
 import torch.nn as nn
-import torch.optim as optim
-import torch.utils.data as Data
-import torch.nn.functional as F
-import torchvision
-import  matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import gc, os
 from module.Model import TwoLayerNet
 from module.utils import *
+import warnings
+warnings.filterwarnings("ignore")
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
@@ -40,7 +31,7 @@ class cramming(nn.Module):
         self.s = s
         self.r = None
         self.ks_mask = \
-            abs(self.model(self.X_train) - self.y_train) > self.lr_goal
+            (self.model(self.X_train) - self.y_train)**2 > self.lr_goal
         
         self.dtype = dtype
     

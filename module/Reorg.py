@@ -1,16 +1,7 @@
-from torch.utils.data import Dataset, DataLoader
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import normalize
-import torch, copy
+import torch
 import torch.nn as nn
 import torch.optim as optim
-import torch.utils.data as Data
-import torch.nn.functional as F
-import torchvision
-import  matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import gc, os
+import gc, os, random
 from module.Weight_tune import *
 from module.Model import TwoLayerNet
 from module.utils import *
@@ -53,11 +44,9 @@ class reorganising():
         self.out_file = out_file
         self.acceptable_path = f'acceptable/{previous_module}.pth'
         if os.path.exists(self.acceptable_path):
-            write(self.out_file, f"Acceptable SLFN exist in '{self.acceptable_path}'", False)
             self.model = torch.load(self.acceptable_path)
         else:
-            write(f"Acceptable SLFN not exist in '{self.acceptable_path}'", False)
-            self.model = "no acceptable slfn"       
+            assert False, f"Acceptable SLFN not exist in '{self.acceptable_path}'"
                          
         self.input_dim = self.model.layer_1.weight.data.shape[1]
         self.hidden_dim = self.model.layer_1.weight.data.shape[0]
@@ -89,7 +78,7 @@ class reorganising():
         
         # SOmethine to create
         temp_save_path = "_temp/reorg_wt.pth"
-        model.train()
+        model.to(device).train()
         optimizer = optim.Adam(model.parameters(), lr = self.lr_rate)
         loss_old = 5e+7
         train_loss_list = []
@@ -103,6 +92,7 @@ class reorganising():
 
             # forward operation
             for _, (X, y) in enumerate(self.train_loader):
+                X, y = X.to(device), y.to(device)
                 
                 optimizer.zero_grad()
                 preds = model(X)
@@ -113,7 +103,9 @@ class reorganising():
 
             # train loss for epoch
             train_loss /= len(self.train_loader)
+            """
             write(self.out_file, f"train_loss: {train_loss}", print_ = False)
+            """
             
             # validate with validate data
             if self.validate_run:
@@ -123,7 +115,9 @@ class reorganising():
             
             # check acceptable and eps for each case
             acceptable, eps, y_pred = acceptable_eps_ypred(self.train_loader, model, self.lr_goal)
+            """
             write(self.out_file, f"max eps sqaure: {max(eps)}", False)
+            """
             
             # train loss < last epoch train loss ?
             """
@@ -167,7 +161,7 @@ class reorganising():
         # Classmate p 13?
 
         # some set
-        self.model.train()     # Enter Train Mode
+        self.model.to(device).train()     # Enter Train Mode
         temp_save_path = "_temp/reg.pth"
         torch.save(self.model, temp_save_path)
         train_loss_list = [] 
@@ -182,7 +176,8 @@ class reorganising():
             train_loss = 0
 
             # forward operation
-            for _, (X, y) in enumerate(self.train_loader):                
+            for _, (X, y) in enumerate(self.train_loader):                              
+                X, y = X.to(device), y.to(device)  
                 optimizer.zero_grad()
                 preds = self.model(X)
                 loss = self.criterion(preds, y) + self.reg(self.hidden_dim, X.shape[0])
@@ -195,8 +190,10 @@ class reorganising():
             train_loss_list.append(train_loss)
 
             # print
+            """
             write(self.out_file, f"train_loss: {train_loss}", False)
             write(self.out_file, f"regular term: {self.reg(self.hidden_dim, X.shape[0])}", False)
+            """
 
             # Validate
             if self.validate_run:
@@ -208,7 +205,9 @@ class reorganising():
             
             # train loss and loss old
             if train_loss < loss_old:
-                write(self.out_file, "Save model and lr increase", False)                
+                """
+                write(self.out_file, "Save model and lr increase", False) 
+                """               
                 # stop 2: if max eps > lr goal 
                 # NOTE: also acceptable, since restore from previous acceptable model
                 if max(eps) >= self.lr_goal:
@@ -286,10 +285,12 @@ class reorganising():
             elif name == "layer_2.bias":
                 pass
                 
+        """
         if False not in delete_status:
             write(self.out_file, "Try trim model: Copy model and delete nodes success", False)
         else:
             write(self.out_file, "Try trim model: Copy model and delete nodes error", False)
+        """
             
         return trim_model
     
@@ -302,44 +303,40 @@ class reorganising():
         trim_model: model trimmed from regular module model. 
                     If acceptable, self.model = trim_model (no trained with weight tune).
         """
-        # Initialise: check if accetable SLFN (wt.pth) exist        
-        if self.model == "no acceptable slfn":
-            return None 
-        
-        # 
+        # Initialise: check if accetable SLFN (wt.pth) exist               
         write(self.out_file, '-----> reorganising')
+        if self.hidden_dim == 1:
+            print('only 1 hidden node')
+            return 
 
         # the k node to be check
-        k = 1 
-        while k<=self.hidden_dim:
-            write(self.out_file, f"---> Checking nodes...{k}/{self.hidden_dim}")
+        # k = 1 
+        # while k<=self.hidden_dim:
+        random_skip = True if self.hidden_dim > 50 else False
+        for k in tqdm(range(self.hidden_dim)):
+            if random_skip:
+                options = [True, False]
+                probabilities = [0.6, 0.4]
+                skip = random.choices(options, probabilities)[0]
+                if skip:
+                    continue
+            k += 1
+            """
             write(self.out_file, f"{str(self.model)}", False)            
             write(self.out_file, f"    --> Start regularising_EU_LG_UA", False)
+            """
 
             # --------------------
-            # regularizing
-            # NOTE: from accpetable to acceptable
-            train_loss_list, test_loss_list = self.regularising_EU_LG_UA()            
+            # regularizing NOTE: from accpetable to acceptable
+            train_loss_list, test_loss_list = self.regularising_EU_LG_UA()  # train self.model          
             acceptable, eps, y_pred = acceptable_eps_ypred(self.train_loader, self.model, self.lr_goal)
-            loss_reg = validate_loss(self.model, self.train_loader, self.criterion)
-
-            # check if acceptable
-            if not acceptable:
-                write(self.out_file, f"weird reg")
-                self.model = "fail regularise"
-                break
+            assert acceptable, 'Wrong in regularise'
             # --------------------
             
             # --------------------
             # A new model trimmed from regualr module model
-            # Use the trim model in weigt tuning
+            # Use the trim model in weight tuning
             trim_model = self.trim_model_nodes(k)
-            # --------------------
-            
-            # --------------------
-            # Training the trim model with weight tune
-            # Return trained trim model
-            write(self.out_file, f"    --> Start module_EU_LG\n", False)
             acceptable, trim_model, train_loss_list, test_loss_list = \
                 self.module_weight_EU_LG_UA(trim_model)            
             if acceptable == True: # and train_loss_list[-1] < loss_reg:
@@ -347,9 +344,7 @@ class reorganising():
                 self.hidden_dim-=1
                 self.model = trim_model
                 if self.hidden_dim == 1:
-                    write(self.out_file, "model only 1 hidden nodes", False)
-            else:
-                k+=1
+                    break
             # --------------------
         
         # Store all model, not just state dict

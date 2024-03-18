@@ -14,9 +14,11 @@ def init_model(X_train, y_train, dtype = torch.float64):
     b = torch.tensor(model.intercept_, dtype=dtype).reshape(1)
 
     model = TwoLayerNet(X_train.shape[1], 1, 1)
+    """
     model.layer_1.weight.data = w
     model.layer_1.bias.data = b
     model.layer_out.weight.data = torch.tensor(1, dtype=dtype).reshape(1, 1)
     model.layer_out.bias.data = miny.reshape(1)
+    """
     model.to(device)
     return model

@@ -1,20 +1,7 @@
-from torch.utils.data import Dataset, DataLoader
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import normalize
-import torch, copy
+import torch
 import torch.nn as nn
-import torch.optim as optim
-import torch.utils.data as Data
-import torch.nn.functional as F
-import torchvision
-import  matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-import gc
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
-
 
 def validate_loss(model, iterator, criterion = nn.MSELoss()):
     """
@@ -32,7 +19,7 @@ def validate_loss(model, iterator, criterion = nn.MSELoss()):
         val_loss /= len(iterator)
     return val_loss 
 
-def acceptable_eps_ypred(train_loader, model, lr_goal, X_train = None, y_train = None):
+def acceptable_eps_ypred(train_loader, model, lr_goal):
     """
     train_loader: train_loader
     model: model
@@ -43,17 +30,15 @@ def acceptable_eps_ypred(train_loader, model, lr_goal, X_train = None, y_train =
     acceptable
     y_pred 
     """
-    eps_square = torch.zeros((1, 1), dtype=torch.float64).to(device)
-    y_pred = torch.zeros((1, 1), dtype=torch.float64).to(device)
+    eps_square = []
+    y_pred = []
     for _, (X, y) in enumerate(train_loader):
         y = y
         preds = model(X)
-        eps_square = torch.cat([eps_square, torch.square(y-preds)], axis = 0)
-        y_pred = torch.cat([y_pred, preds], axis = 0)
-    eps_square, y_pred = eps_square[1:], y_pred[1:]
-
-
-    if max(eps_square) < lr_goal**2:
+        eps_square.append(torch.square(y-preds))
+        y_pred.append(preds)
+    eps_square, y_pred = torch.cat(eps_square, dim = 0), torch.cat(y_pred, dim = 0)
+    if max(eps_square) < lr_goal:
         return True, eps_square, y_pred
     else:
         return False, eps_square, y_pred
