@@ -50,18 +50,6 @@ The modules used in new learning algorith
     - Ruled based adding nodes
     - For each case that did not fit well to the model, assign three nodes for the case in the model, where the weights for each nodes is predefined
 
-
-## RESULT
-train loss: 0.00041519435840462924
-test loss: 0.002123679771900428
-train residual max 0.026442381296536088
-test residual max 0.04143138922202543
-
-|                         | Train Loss | Train Max Epsilon | Test Loss  | Test Max Epsilon | Train Time  | 
-| ----------------------- | ---------- | ----------------- | ---------- | -----------------| ----------- |
-| Full learning algorithm |   0.00016  |      0.00118      | 0.000496   |       0.00500    |    22 min   |
-| Two Layer Net           |   0.00041  |      0.02644      | 0.00212    |       0.04143    |   4 min     |
-
 ## ENVIRONMENT
 - GPU: CUDA 12.0
 - Python 3.11

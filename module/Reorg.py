@@ -21,11 +21,6 @@ class reorganising():
             print_w_tune = False,
             validate_run = False):
         super(reorganising, self).__init__()
-        # Reorganising module
-        # regular module
-        #   model => self.model: main model (final model) in regualrising module. 
-        # wieght tune module
-        #   model => create new model when process  
         """
         previous_module: "wt" or "Cram"
         hidden_dim: hidden dimension of model
@@ -38,6 +33,12 @@ class reorganising():
         eps_reg: early stopping epsilon for regularization
         eps_w_tune: early stopping epsilon for weight tuning
         validate_run: use model with test loader and check loss if True
+        =========
+        # Reorganising module
+        # regular module
+        #   model => self.model: main model (final model) in regualrising module. 
+        # wieght tune module
+        #   model => create new model when process  
         """        
 
         # Initialise: check if accetable SLFN (wt.pth) exist  
@@ -303,8 +304,7 @@ class reorganising():
         trim_model: model trimmed from regular module model. 
                     If acceptable, self.model = trim_model (no trained with weight tune).
         """
-        # Initialise: check if accetable SLFN (wt.pth) exist               
-        write(self.out_file, '-----> reorganising')
+        # Initialise: check if accetable SLFN (wt.pth) exist 
         if self.hidden_dim == 1:
             print('only 1 hidden node')
             return 

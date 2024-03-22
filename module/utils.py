@@ -20,6 +20,7 @@ def validate_loss(model, iterator, criterion = nn.MSELoss()):
     return val_loss 
 
 def acceptable_eps_ypred(train_loader, model, lr_goal):
+    # Check if acceptable for loader
     """
     train_loader: train_loader
     model: model
@@ -38,7 +39,8 @@ def acceptable_eps_ypred(train_loader, model, lr_goal):
         eps_square.append(torch.square(y-preds))
         y_pred.append(preds)
     eps_square, y_pred = torch.cat(eps_square, dim = 0), torch.cat(y_pred, dim = 0)
-    if max(eps_square) < lr_goal:
+    
+    if (max(eps_square) - lr_goal) <= 1e-12:
         return True, eps_square, y_pred
     else:
         return False, eps_square, y_pred
