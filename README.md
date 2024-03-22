@@ -5,7 +5,6 @@ New Learning Algorithm (2021), by Prof. TSAIH RUA-HUAN at Management Information
 - [INTRODUCTION](https://github.com/KJJHHH/New-Learning-Algorithm-2021-NCCU?tab=readme-ov-file#introduction)
 - [DATA](https://github.com/KJJHHH/New-Learning-Algorithm-2021-NCCU?tab=readme-ov-file#data)
 - [NEW LEARNING ALGORITHM](https://github.com/KJJHHH/New-Learning-Algorithm-2021-NCCU?tab=readme-ov-file#new-learning-algorithm)
-- [RESULT](https://github.com/KJJHHH/New-Learning-Algorithm-2021-NCCU?tab=readme-ov-file#result)
 - [ENVIRONMENT](https://github.com/KJJHHH/New-Learning-Algorithm-2021-NCCU?tab=readme-ov-file#environment)
 
 ## INTRODUCTION
